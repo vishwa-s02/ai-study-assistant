@@ -100,16 +100,17 @@ async function askQuestion() {
 
     scrollToBottom();
 
-    let response = await fetch("https://ai-study-assistant-1-h34m.onrender.com/ask",{
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ question: question })
-    });
+    let response = await fetch("https://ai-study-assistant-1-h34m.onrender.com/ask", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        question: question
+    })
+});
 
-    let data = await response.json();
-
+let data = await response.json();
     // Remove loading
     document.getElementById("loading").remove();
 
