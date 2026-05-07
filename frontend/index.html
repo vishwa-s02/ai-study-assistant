@@ -100,7 +100,7 @@ async function askQuestion() {
 
     scrollToBottom();
 
-    let response = await fetch("http://127.0.0.1:5000/ask", {
+    let response = awaitfetch("https://ai-study-assistant-1-h34m.onrender.com/ask", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
