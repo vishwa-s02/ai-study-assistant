@@ -1,29 +1,47 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
-CORS(app)   # 🔥 This fixes your error
 
+# Enable CORS
+CORS(app)
+
+# Home route
 @app.route("/")
 def home():
-    return "AI Study Assistant Running 🚀"
+    return "AI Study Assistant Backend is Running!"
 
+# Ask route
 @app.route("/ask", methods=["POST"])
 def ask():
-    data = request.json
+    data = request.get_json()
+
     question = data.get("question", "").lower()
 
-    # Fake AI logic
-    if "ai" in question:
-        answer = "AI (Artificial Intelligence) is the simulation of human intelligence by machines."
-    elif "os" in question or "operating system" in question:
-        answer = "An Operating System manages hardware and software resources."
-    elif "dbms" in question:
-        answer = "DBMS is a system to store, manage, and retrieve data."
-    else:
-        answer = "This is a demo AI response. You can connect a real AI API later."
+    # Simple AI responses
+    answers = {
+        "what is ai": "AI stands for Artificial Intelligence.",
+        "what is python": "Python is a programming language.",
+        "what is html": "HTML is used to create web pages.",
+        "what is css": "CSS is used for styling web pages.",
+        "what is javascript": "JavaScript makes websites interactive."
+    }
 
-    return jsonify({"answer": answer})
+    answer = answers.get(
+        question,
+        "Sorry, I don't know the answer yet."
+    )
 
+    return jsonify({
+        "answer": answer
+    })
+
+# Run Flask app
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+    port = int(os.environ.get("PORT", 5000))
+
+    app.run(
+        host="0.0.0.0",
+        port=port
+    )
