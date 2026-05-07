@@ -7,30 +7,25 @@ CORS(app)
 
 @app.route("/")
 def home():
-    return "AI Study Assistant Backend Running"
+    return "Backend is running!"
 
 @app.route("/ask", methods=["POST"])
 def ask():
     data = request.get_json()
+
     question = data.get("question", "").lower()
 
     if "ai" in question:
-        answer = "AI stands for Artificial Intelligence. It enables machines to think and learn like humans."
+        answer = "AI stands for Artificial Intelligence. It helps machines think like humans."
 
     elif "python" in question:
-        answer = "Python is a popular programming language used for web development, AI, and automation."
+        answer = "Python is a programming language."
 
     elif "html" in question:
-        answer = "HTML is used to create webpages."
-
-    elif "css" in question:
-        answer = "CSS is used to style webpages."
-
-    elif "javascript" in question:
-        answer = "JavaScript adds interactivity to websites."
+        answer = "HTML is used to create web pages."
 
     else:
-        answer = "Sorry, I don't know the answer yet."
+        answer = "I understood your question: " + question
 
     return jsonify({
         "answer": answer
